@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Sign In</h5>
+          <form [formGroup]="loginForm " class="form-signin" (ngSubmit)="onSubmit()">
+            <div class="form-label-group">
+              <label for="email">Email address</label>
+              <input type="email" formControlName="email" class="form-control" placeholder="Email address"
+                     autofocus
+                 
+                  [ngClass]="{ 'is-invalid': ui?.submitted && loginForm?.get('email')?.invalid && (loginForm?.get('email')?.touched || loginForm?.get('email')?.dirty) }">   
+                   <!-- [class.active]="{ 'is-invalid': ui?.submitted && form.controls['email']?.errors }"> -->  
+                <!--     [ngClass]="{ 'is-invalid': ui?.submitted && form.controls['email']?.errors }"> --> 
+                @if (ui?.submitted && loginForm?.get('email')?.invalid && (loginForm?.get('email')?.touched || loginForm?.get('email')?.dirty) ) {
+                    <!-- *ngIf="ui?.submitted && form.controls['email']?.errors"  -->
+              <div class="invalid-feedback">
+
+                @if (loginForm?.get('email')?.hasError('required')) {
+                  <div  >Email is required</div>
+                }
+                 <!--  <div *ngIf="form.controls['email']?.errors?.['required']">Email is required</div>-->
+                @if (loginForm?.get('email')?.hasError('email')) {
+                  <div>Wrong email format</div>
+                }
+                <!-- <div *ngIf="form.controls['email']?.errors?.['email']">Wrong email format</div> -->
+              </div>
+               }
+            </div>
+            <br>
+            <div class="form-label-group">
+              <label for="password">Password</label>
+              <input type="password" formControlName="password" class="form-control" placeholder="Password"
+                     [ngClass]="{ 'is-invalid': ui.submitted && loginForm?.get('password')?.invalid && (loginForm?.get('password')?.touched || loginForm?.get('password')?.dirty)  }">
+
+                     <!--   [ngClass]="{ 'is-invalid': ui.submitted && form.controls['password']?.errors }">-->
+                     @if (ui?.submitted && loginForm?.get('password')?.invalid && (loginForm?.get('password')?.touched || loginForm?.get('password')?.dirty) ) {
+                        <!--  *ngIf="ui?.submitted && form.controls['password']?.errors" -->
+                       <div class="invalid-feedback">
+                        @if (loginForm?.get('password')?.hasError('required')) {
+                          <!-- *ngIf="form.controls['password']?.errors?.['required']" -->
+                      <div >Password is required</div>
+                        } 
+                        <!-- *ngIf="form.controls['password']?.errors?.['minlength']" -->
+                        @if (loginForm?.get('password')?.hasError('minlength')) {  
+                        <div >Wrong password</div>
+                        }
+              </div>
+                } 
+            </div>
+            <br>
+            <button [disabled]="ui?.processing" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">
+              @if (ui.processing) {  
+                <!-- *ngIf="ui?.processing"  -->
+                 <span  class="spinner-border spinner-border-sm mr-1"></span>
+              }
+              Sign in
+            </button>
+            @if (ui.error) {      <!-- *ngIf="ui?.error"  -->
+              <div class="alert alert-danger mt-3 mb-0">{{ui?.error | json }}</div>
+            } 
+            <br>
+            Does not have an account? <a routerLink="/register">Register</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

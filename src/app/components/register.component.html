@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Register New User</h5>
+          <form [formGroup]="registerForm" class="form-signin" (ngSubmit)="onSubmit()">
+            <div class="form-label-group">
+              <label for="email">Email address</label>
+              <input type="email" formControlName="email" class="form-control" placeholder="Email address"
+                     autofocus
+                     [ngClass]="{ 'is-invalid': registerForm?.get('email')?.hasError('email') && (ui?.submitted ||  registerForm?.get('email')?.hasError('isTaken')) }"
+                      />
+                   <!-- [ngClass]="{ 'is-invalid': form.controls ['email']?.errors && (ui?.submitted || form .controls ['email']?.errors?.['isTaken']) }"> --> 
+                     @if ( registerForm?.get('email')?.invalid && (registerForm?.get('email')?.touched || registerForm?.get('email')?.dirty) ) {
+                        <!-- *ngIf="form.controls ['email'].errors" -->
+                       <div  class="invalid-feedback">
+                   @if ( ui?.submitted ) {
+
+                     <!--  <ng-container *ngIf="ui?.submitted "> -->
+                      @if ( registerForm?.get('email')?.hasError('required') ) {
+                        <!-- *ngIf="form .controls['email']?.errors?.['required']" -->
+                        <div >Email is required</div>
+                      }
+                      @if ( registerForm?.get('email')?.hasError('email') ) {
+                          <!-- *ngIf="form .controls['email']?.errors?.['email']"-->
+                        <div >Wrong email format</div>
+                      }
+                     <!--   </ng-container> -->
+                 } 
+                     @if ( registerForm?.get('email')?.hasError('isTaken')  ) {
+
+                       <!--  *ngIf="form  .controls['email'].errors['isTaken']" -->
+                      <div >Email already is taken</div>
+                     }
+                </div>
+                } 
+            <br/>
+            </div>
+            <div class="form-label-group">
+              <label for="password">Password</label>
+              <input type="password" formControlName="password" class="form-control" placeholder="Password"
+                         [ngClass]="{ 'is-invalid': ui?.submitted &&   registerForm?.get('email')?.hasError('password')    }"  >
+                   <!--      registerForm.get('email')?.hasError('email') && (ui?.submitted ||  registerForm.get('email')?.hasError('isTaken'))     
+                     [ngClass]="{ 'is-invalid': ui?.submitted && form .controls['password']?.errors  }">-->   
+
+                     @if ( ui?.submitted  ) { 
+                      @if ( registerForm?.get('password')?.invalid && (registerForm?.get('password')?.touched || registerForm?.get('password')?.dirty) ) {
+                      
+                       <!--  *ngIf="ui?.submitted && form['password']?.errors"   -->
+                       <div  class="invalid-feedback">
+                        @if ( registerForm?.get('password')?.hasError('required') ) {
+                          <!-- *ngIf="form .controls['password']?.errors?.['required']"-->
+                             <div >Password is required</div>
+                        }
+                        @if ( registerForm?.get('password')?.hasError('minlength') ) {
+                             <!--*ngIf="form .controls['password']?.errors?.['minlength']" -->
+                            <div >Wrong password</div>
+                        }
+                    </div>
+                  }
+              }
+            </div>
+            <br/>
+            <button [disabled]="ui?.processing " class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">
+              @if (ui.processing) {  
+                 <!-- *ngIf="ui?.processing " -->
+              <span  class="spinner-border spinner-border-sm mr-1"></span>
+              }
+              Register
+            </button>
+            @if (ui.error) {  
+              <!-- *ngIf="ui?.error" -->
+            <div class="alert alert-danger mt-3 mb-0">{{ui?.error | json }}</div>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
