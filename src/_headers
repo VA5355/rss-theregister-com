@@ -1,0 +1,23 @@
+/*
+  Content-Security-Policy: frame-ancestors 
+    https://storenotify.in
+    https://frabjous-truffle-675e06.netlify.app
+    https://5j3c1fv094.execute-api.us-east-1.amazonaws.com
+    https://atmdemoaivenmysql.onrender.com
+    https://rzp.io
+    http://localhost:4200
+    http://192.168.1.7:4200
+    http://192.168.1.7:8888
+    https://192.168.1.7:4200
+    https://192.168.1.7:8888
+    https://peppy-tarsier-b1d067.netlify.app
+    https://rss-storenotify.netlify.app
+    
+/*
+ X-Frame-Options: allow-from https://storenotify.in , https://rss-storenotify.netlify.app , https://peppy-tarsier-b1d067.netlify.app , http://192.168.1.7:4200 ,  http://192.168.1.7:8888 ,  http://localhost:4200 , https://5j3c1fv094.execute-api.us-east-1.amazonaws.com , https://atmdemoaivenmysql.onrender.com , https://rzp.io , https://frabjous-truffle-675e06.netlify.app
+   
+
+/api/*
+  Access-Control-Allow-Origin: http://localhost:4200
+  Access-Control-Allow-Methods: GET, POST, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization
